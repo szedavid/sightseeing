@@ -4,6 +4,7 @@ import com.sun.istack.NotNull;
 
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.Set;
 
 // Using @Data for JPA entities is not recommended. It can cause severe performance and memory consumption issues.
 
@@ -15,6 +16,7 @@ public class User {
     private Long id;
 
     @NotNull
+    @Column(unique = true)
     //    @Size(max = 50)    // todo
     private String username;
 
@@ -22,14 +24,14 @@ public class User {
     //    @Size(max = 100)    // todo
     private String password; // todo encrypt
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)    // todo LAZY
     @JoinTable(
             name = "users_roles",
             joinColumns = @JoinColumn(
                     name = "user_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(
                     name = "role_id", referencedColumnName = "id"))
-    private Collection<Role> roles;
+    private Set<Role> roles;
 
     public Long getId() {
         return id;
@@ -51,11 +53,11 @@ public class User {
         this.password = password;
     }
 
-    public Collection<Role> getRoles() {
+    public Set<Role> getRoles() {
         return roles;
     }
 
-    public void setRoles(Collection<Role> roles) {
+    public void setRoles(Set<Role> roles) {
         this.roles = roles;
     }
 }

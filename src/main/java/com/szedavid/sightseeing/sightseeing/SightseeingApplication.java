@@ -21,7 +21,7 @@ public class SightseeingApplication {
 		SpringApplication.run(SightseeingApplication.class, args);
 	}
 
-	// todo másképp?
+	// todo with Liquibase
 	@EventListener(ApplicationReadyEvent.class)
 	public void createDemoUsers() {
 		roleService.init();
