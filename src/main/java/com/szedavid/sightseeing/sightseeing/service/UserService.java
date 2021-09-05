@@ -5,34 +5,43 @@ import com.szedavid.sightseeing.sightseeing.repository.IUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 
 @Service
 public class UserService {
 
-  private final IUserRepository userRepository;
+  private IUserRepository userRepository;
+  private RoleService roleService;
 
   @Autowired
-  public UserService(IUserRepository userRepository) {
+  public void setUserRepository(IUserRepository userRepository){
     this.userRepository = userRepository;
+  }
+
+  @Autowired
+  public void setRoleService(RoleService roleService){
+    this.roleService = roleService;
   }
 
   public void fillWithDemoUsers() {
     User user = new User();
     user.setUsername("john");
-    user.setPassword("john12");
-    createUser(user);
+    user.setPassword("john12"); // todo encode
+    user.setRoles(List.of(roleService.findByName("ROLE_USER")));
+    create(user);
 
     user = new User();
     user.setUsername("admin");
-    user.setPassword("admin12");
-    user.setAdmin(true);
-    createUser(user);
+    user.setPassword("admin12"); // todo encode
+    user.setRoles(Arrays.asList(roleService.findByName("ROLE_USER"), roleService.findByName("ROLE_ADMIN")));
+    create(user);
 
     System.out.println("Users with 'user' and 'admin' level ready to use.");
   }
 
-  public User createUser(User user) {
+  public User create(User user) {
     if(findUser(user.getUsername()).isPresent()){
       // todo error?
       System.out.println("User name in use: " + user.getUsername());

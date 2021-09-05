@@ -2,26 +2,38 @@ package com.szedavid.sightseeing.sightseeing.entity;
 
 import com.sun.istack.NotNull;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.Collection;
 
 // Using @Data for JPA entities is not recommended. It can cause severe performance and memory consumption issues.
 
 @Entity
 public class User {
+
     @Id
-    //    @Size(max = 50)    // todo
-    @Column(nullable = false)
-    private String username;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
     @NotNull
     //    @Size(max = 50)    // todo
-    @Column(nullable = false)
-    private String password;    // todo encrypt
+    private String username;
 
-    private Boolean isAdmin;    // todo is boolean best practice in DB?
+    @NotNull
+    //    @Size(max = 100)    // todo
+    private String password; // todo encrypt
+
+    @ManyToMany
+    @JoinTable(
+            name = "users_roles",
+            joinColumns = @JoinColumn(
+                    name = "user_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(
+                    name = "role_id", referencedColumnName = "id"))
+    private Collection<Role> roles;
+
+    public Long getId() {
+        return id;
+    }
 
     public String getUsername() {
         return username;
@@ -39,11 +51,11 @@ public class User {
         this.password = password;
     }
 
-    public Boolean getAdmin() {
-        return isAdmin;
+    public Collection<Role> getRoles() {
+        return roles;
     }
 
-    public void setAdmin(Boolean admin) {
-        isAdmin = admin;
+    public void setRoles(Collection<Role> roles) {
+        this.roles = roles;
     }
 }

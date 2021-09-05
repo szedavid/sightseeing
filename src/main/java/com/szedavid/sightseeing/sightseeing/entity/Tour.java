@@ -13,7 +13,6 @@ import javax.persistence.Id;
 @Entity
 public class Tour {
     @Id
-    @GeneratedValue
     private Long id;
 
     @NotNull

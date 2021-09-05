@@ -1,5 +1,6 @@
 package com.szedavid.sightseeing.sightseeing;
 
+import com.szedavid.sightseeing.sightseeing.service.RoleService;
 import com.szedavid.sightseeing.sightseeing.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
@@ -11,6 +12,9 @@ import org.springframework.context.event.EventListener;
 public class SightseeingApplication {
 	// todo del
 	@Autowired
+	RoleService roleService;
+	// todo del
+	@Autowired
 	UserService userService;
 
 	public static void main(String[] args) {
@@ -19,7 +23,8 @@ public class SightseeingApplication {
 
 	// todo másképp?
 	@EventListener(ApplicationReadyEvent.class)
-	public void doSomethingAfterStartup() {
+	public void createDemoUsers() {
+		roleService.init();
 		userService.fillWithDemoUsers();
 	}
 }

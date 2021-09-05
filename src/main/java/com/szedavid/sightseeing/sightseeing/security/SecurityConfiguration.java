@@ -7,13 +7,13 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 @Configuration
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
-    @Override
-    protected void configure(HttpSecurity httpSecurity) throws Exception {
-        // for H2 - todo del
-        httpSecurity.authorizeRequests().antMatchers("/h2-console/**").permitAll();
-        httpSecurity.csrf().disable();
-        httpSecurity.headers().frameOptions().disable();
-        // ... todo del to here
-    }
+//    @Override
+//    protected void configure(HttpSecurity httpSecurity) throws Exception {
+//        // for H2 - todo del
+//        httpSecurity.authorizeRequests().antMatchers("/h2-console/**").permitAll()
+//                .and().csrf().ignoringAntMatchers("/h2-console/**")
+//                .and().headers().frameOptions().sameOrigin();
+//        // ... todo del to here
+//    }
 
 }
