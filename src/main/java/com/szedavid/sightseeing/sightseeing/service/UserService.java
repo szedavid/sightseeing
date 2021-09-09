@@ -1,23 +1,21 @@
 package com.szedavid.sightseeing.sightseeing.service;
 
 import com.szedavid.sightseeing.sightseeing.entity.User;
-import com.szedavid.sightseeing.sightseeing.repository.IUserRepository;
+import com.szedavid.sightseeing.sightseeing.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Arrays;
-import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
 @Service
 public class UserService {
 
-  private IUserRepository userRepository;
+  private UserRepository userRepository;
   private RoleService roleService;
 
   @Autowired
-  public void setUserRepository(IUserRepository userRepository){
+  public void setUserRepository(UserRepository userRepository){
     this.userRepository = userRepository;
   }
 

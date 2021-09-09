@@ -1,7 +1,7 @@
 package com.szedavid.sightseeing.sightseeing.service;
 
 import com.szedavid.sightseeing.sightseeing.entity.Tour;
-import com.szedavid.sightseeing.sightseeing.repository.ITourRepository;
+import com.szedavid.sightseeing.sightseeing.repository.TourRepository;
 import net.minidev.json.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,10 +12,10 @@ import java.util.Optional;
 @Service
 public class TourService {
 
-    private final ITourRepository tourRepository;
+    private final TourRepository tourRepository;
 
     @Autowired
-    public TourService(ITourRepository tourRepository) {
+    public TourService(TourRepository tourRepository) {
         this.tourRepository = tourRepository;
     }
 

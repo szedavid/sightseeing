@@ -1,20 +1,17 @@
 package com.szedavid.sightseeing.sightseeing.service;
 
 import com.szedavid.sightseeing.sightseeing.entity.Role;
-import com.szedavid.sightseeing.sightseeing.entity.Role;
-import com.szedavid.sightseeing.sightseeing.repository.IRoleRepository;
+import com.szedavid.sightseeing.sightseeing.repository.RoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.Optional;
 
 @Service
 public class RoleService {
 
-  private final IRoleRepository roleRepository;
+  private final RoleRepository roleRepository;
 
   @Autowired
-  public RoleService(IRoleRepository roleRepository) {
+  public RoleService(RoleRepository roleRepository) {
     this.roleRepository = roleRepository;
   }
 

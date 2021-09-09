@@ -8,6 +8,6 @@ import java.util.List;
 
 //@RepositoryRestResource(collectionResourceRel = "tours", path = "tours")    // todo think  -  auth?!
 @Repository
-public interface ITourRepository extends JpaRepository<Tour, Long> {
+public interface TourRepository extends JpaRepository<Tour, Long> {
     List<Tour> findByNameContainingIgnoreCase(String namePart);  // todo IgnoreCase
 }
