@@ -1,7 +1,7 @@
-package com.szedavid.sightseeing.sightseeing.service;
+package com.szedavid.sightseeing.service;
 
-import com.szedavid.sightseeing.sightseeing.entity.Role;
-import com.szedavid.sightseeing.sightseeing.repository.RoleRepository;
+import com.szedavid.sightseeing.entity.Role;
+import com.szedavid.sightseeing.repository.RoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

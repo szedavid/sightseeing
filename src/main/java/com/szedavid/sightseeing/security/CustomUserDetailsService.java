@@ -1,7 +1,7 @@
-package com.szedavid.sightseeing.sightseeing.security;
+package com.szedavid.sightseeing.security;
 
-import com.szedavid.sightseeing.sightseeing.entity.User;
-import com.szedavid.sightseeing.sightseeing.service.UserService;
+import com.szedavid.sightseeing.entity.User;
+import com.szedavid.sightseeing.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

@@ -1,4 +1,4 @@
-package com.szedavid.sightseeing.sightseeing.entity;
+package com.szedavid.sightseeing.entity;
 
 import com.sun.istack.NotNull;
 

@@ -1,9 +1,8 @@
-package com.szedavid.sightseeing.sightseeing.entity;
+package com.szedavid.sightseeing.entity;
 
 import com.sun.istack.NotNull;
 
 import javax.persistence.*;
-import java.util.Collection;
 import java.util.Set;
 
 // Using @Data for JPA entities is not recommended. It can cause severe performance and memory consumption issues.

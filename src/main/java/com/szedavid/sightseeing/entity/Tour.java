@@ -1,7 +1,6 @@
-package com.szedavid.sightseeing.sightseeing.entity;
+package com.szedavid.sightseeing.entity;
 
 import com.sun.istack.NotNull;
-import lombok.Data;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
