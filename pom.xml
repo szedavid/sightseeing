@@ -16,7 +16,7 @@
 
     <properties>
         <java.version>11</java.version>
-        <spring-cloud.version>Greenwich.RELEASE</spring-cloud.version>
+        <spring-cloud.version>2020.0.3</spring-cloud.version>
     </properties>
 
     <dependencyManagement>
@@ -51,7 +51,11 @@
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-openfeign</artifactId>
-            <version>${spring-cloud.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.github.openfeign</groupId>
+            <artifactId>feign-core</artifactId>
+            <version>10.12</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>

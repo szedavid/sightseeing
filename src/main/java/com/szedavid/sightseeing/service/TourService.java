@@ -40,7 +40,7 @@ public class TourService {
 
     public String refresh(RefreshFilterDTO filter) {
         PocketguideDataDTO receivedData = pocketguideClient.getTours();
-        List<TourDTO> tours = receivedData.getTours();
+        List<Tour> tours = receivedData.getTours();
         // todo filter
         return JSONArray.toJSONString(tours);
     }
