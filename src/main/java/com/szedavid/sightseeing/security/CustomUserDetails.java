@@ -22,12 +22,11 @@ public class CustomUserDetails implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        Collection<SimpleGrantedAuthority> collection = new ArrayList<>();
-        for (Role role: user.getRoles()) {
+        var collection = new ArrayList<SimpleGrantedAuthority>();
+        user.getRoles().forEach(role -> {
             collection.add(new SimpleGrantedAuthority(role.getName()));
-
             System.out.println("Auth: " + user.getUsername() + " - " + role.getName());
-        }
+        });
         return collection;
     }
 

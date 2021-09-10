@@ -17,7 +17,7 @@ public class RoleService {
 
   // todo másképp?
   public void init() {
-    Role role = new Role();
+    var role = new Role();
     role.setName("ROLE_USER");
     create(role);
 

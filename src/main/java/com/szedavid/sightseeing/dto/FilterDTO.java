@@ -1,5 +1,5 @@
 package com.szedavid.sightseeing.dto;
 
-public class RefreshFilterDTO {
+public class FilterDTO {
     public String filter;
 }

@@ -25,7 +25,7 @@ public class UserService {
   }
 
   public void fillWithDemoUsers() {
-    User user = new User();
+    var user = new User();
     user.setUsername("john");
     user.setPassword("$2a$12$qWD5QdzQZ8QCd5chaYME7Ou/TBDByqGibbQrndM7UlSxJbd2NL1T6");
     user.setRoles(Set.of(roleService.findByName("ROLE_USER")));
