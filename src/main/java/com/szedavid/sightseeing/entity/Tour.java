@@ -5,9 +5,7 @@ import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.validation.constraints.Size;
 
 // Using @Data for JPA entities is not recommended. It can cause severe performance and memory consumption issues.
 
@@ -17,11 +15,11 @@ public class Tour {
     private Long id;
 
     @NotNull
-    @Size(max = 250)
+    @Length(max = 250)
     @Column(nullable = false)
     private String name;
 
-    @Size(max = 5000)
+    @Length(max = 5000)
     private String longDesc;
 
     public Long getId() {

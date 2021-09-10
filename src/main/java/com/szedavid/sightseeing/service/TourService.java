@@ -36,7 +36,7 @@ public class TourService {
         List<String> names = new ArrayList<>();
         tours.forEach((tour -> names.add(tour.getName())));
 
-        return JSONArray.toJSONString(tours);
+        return JSONArray.toJSONString(names);
     }
 
     public void refresh(FilterDTO filterDTO) {

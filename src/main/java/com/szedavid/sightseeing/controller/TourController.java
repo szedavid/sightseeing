@@ -20,7 +20,7 @@ public class TourController {
 
     @GetMapping("/tours")
     public String getTours(
-            @RequestParam("filter")Optional<String> filter
+            @RequestParam("filter") Optional<String> filter
             ) {
         // todo only names?
             return tourService.findFilteredTours(filter);
