@@ -1,1 +1,0 @@
-INSERT INTO TOURS (nave, longDesc) VALUES ( 'Test', 'This is an automatically created test tour.' );

@@ -3,7 +3,9 @@ package com.szedavid.sightseeing.controller;
 import com.szedavid.sightseeing.dto.RefreshFilterDTO;
 import com.szedavid.sightseeing.service.TourService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.Optional;
 
@@ -26,10 +28,11 @@ public class TourController {
     }
 
     @PostMapping("/tours/refresh")
-    public String refresh(
-//  todo ?           @Validated RefreshFilter refreshFilter
+    @ResponseStatus(HttpStatus.OK)
+    public void refresh(
             @RequestBody RefreshFilterDTO refreshFilter
     ) {
-        return tourService.refresh(refreshFilter);
+//        log.info("Request to create student: {}", student); todo log in other places too
+            tourService.refresh(refreshFilter);
     }
 }

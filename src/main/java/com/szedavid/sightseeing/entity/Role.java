@@ -3,6 +3,7 @@ package com.szedavid.sightseeing.entity;
 import com.sun.istack.NotNull;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 import java.util.Collection;
 
 @Entity
@@ -13,6 +14,7 @@ public class Role {
     private Long id;
 
     @NotNull
+    @Size(max = 50)
     private String name;
 
     @ManyToMany(mappedBy = "roles")

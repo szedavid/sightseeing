@@ -3,6 +3,7 @@ package com.szedavid.sightseeing.entity;
 import com.sun.istack.NotNull;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 import java.util.Set;
 
 // Using @Data for JPA entities is not recommended. It can cause severe performance and memory consumption issues.
@@ -16,11 +17,11 @@ public class User {
 
     @NotNull
     @Column(unique = true)
-    //    @Size(max = 50)    // todo
+    @Size(max = 50)    // todo
     private String username;
 
     @NotNull
-    //    @Size(max = 100)    // todo
+    @Size(max = 100)
     private String password; // todo encrypt
 
     @ManyToMany(fetch = FetchType.EAGER)    // todo LAZY
