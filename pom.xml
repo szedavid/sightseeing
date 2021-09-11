@@ -17,6 +17,7 @@
     <properties>
         <java.version>11</java.version>
         <spring-cloud.version>2020.0.3</spring-cloud.version>
+        <test.min.coverage>0.8</test.min.coverage>
     </properties>
 
     <dependencyManagement>
@@ -107,8 +108,15 @@
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
                 <version>0.8.7</version>
+                <configuration>
+                    <excludes>
+                        <exclude>**/*DTO.*</exclude>
+                        <exclude>**/model/*</exclude>
+                    </excludes>
+                </configuration>
                 <executions>
                     <execution>
+                        <id>jacoco-initialize</id>
                         <goals>
                             <goal>prepare-agent</goal>
                         </goals>
@@ -129,12 +137,11 @@
                             <rules>
                                 <rule>
                                     <element>PACKAGE</element>
-                                    <excludes>*DTO</excludes>
                                     <limits>
                                         <limit>
                                             <counter>LINE</counter>
                                             <value>COVEREDRATIO</value>
-                                            <minimum>0.9</minimum>
+                                            <minimum>${test.min.coverage}</minimum>
                                         </limit>
                                     </limits>
                                 </rule>
