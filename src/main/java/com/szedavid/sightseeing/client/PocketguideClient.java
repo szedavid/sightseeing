@@ -10,6 +10,6 @@ import org.springframework.web.bind.annotation.GetMapping;
         configuration = ClientConfiguration.class)
 public interface PocketguideClient {
 
-    @GetMapping(value = "${application.rest.pocketguide.path}", produces = "application/json")
+    @GetMapping(value = "/pocketguide/_test/store_en.v2.gz", produces = "application/json")
     PocketguideDataDTO getTours();
 }
