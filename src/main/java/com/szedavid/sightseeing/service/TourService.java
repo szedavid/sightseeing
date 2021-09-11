@@ -45,7 +45,7 @@ public class TourService {
     public void refresh(FilterDTO filterDTO) {
         var receivedData = pocketguideClient.getTours();
         var tours = receivedData.getTours();
-        if(filterDTO.filter != null) {
+        if (filterDTO.filter != null) {
             tours = filterTours(tours, filterDTO.filter);
         }
         tourRepository.saveAll(tours);
@@ -53,7 +53,7 @@ public class TourService {
 
     private ArrayList<Tour> filterTours(List<Tour> tours, String filter) {
         var filteredTours = new ArrayList<>(tours);
-        CollectionUtils.filter(filteredTours, tour -> (((Tour)tour).getName().toUpperCase().contains(filter.toUpperCase())));
+        CollectionUtils.filter(filteredTours, tour -> (((Tour) tour).getName().toUpperCase().contains(filter.toUpperCase())));
         return filteredTours;
     }
 }

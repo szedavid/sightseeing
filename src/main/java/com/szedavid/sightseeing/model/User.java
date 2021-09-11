@@ -17,7 +17,7 @@ public class User {
 
     @NotNull
     @Column(unique = true)
-    @Length(max = 50)    // todo
+    @Length(max = 50)
     private String username;
 
     @NotNull
