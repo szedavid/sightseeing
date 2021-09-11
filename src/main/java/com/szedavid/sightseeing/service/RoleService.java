@@ -8,15 +8,14 @@ import org.springframework.stereotype.Service;
 @Service
 public class RoleService {
 
-  private final RoleRepository roleRepository;
+  private RoleRepository roleRepository;
 
   @Autowired
-  public RoleService(RoleRepository roleRepository) {
+  public void setRoleRepository(RoleRepository roleRepository) {
     this.roleRepository = roleRepository;
   }
 
-  // todo másképp?
-  public void init() {
+  public void initForDemo() {
     var role = new Role();
     role.setName("ROLE_USER");
     create(role);

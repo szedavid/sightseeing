@@ -26,11 +26,6 @@ public class Tour {
         return id;
     }
 
-    // todo del ?
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public String getName() {
         return name;
     }

@@ -12,10 +12,12 @@ import org.springframework.context.event.EventListener;
 @SpringBootApplication
 @EnableFeignClients
 public class SightseeingApplication {
-	// todo del
+
+	// todo documentation for all publics
+
 	@Autowired
 	RoleService roleService;
-	// todo del
+
 	@Autowired
 	UserService userService;
 
@@ -23,10 +25,10 @@ public class SightseeingApplication {
 		SpringApplication.run(SightseeingApplication.class, args);
 	}
 
-	// todo with Liquibase
+	// In a real project I would recommend Liquibase
 	@EventListener(ApplicationReadyEvent.class)
 	public void createDemoUsers() {
-		roleService.init();
-		userService.fillWithDemoUsers();
+		roleService.initForDemo();
+		userService.initForDemo();
 	}
 }

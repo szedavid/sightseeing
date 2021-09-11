@@ -16,17 +16,20 @@ import java.util.Optional;
 @Service
 public class TourService {
 
-    private final TourRepository tourRepository;
-    private final PocketguideClient pocketguideClient;
+    private TourRepository tourRepository;
+    private PocketguideClient pocketguideClient;
 
-    // todo másképp
     @Autowired
-    public TourService(TourRepository tourRepository, PocketguideClient pocketguideClient) {
+    public void setTourRepository(TourRepository tourRepository) {
         this.tourRepository = tourRepository;
+    }
+
+    @Autowired
+    public void setPocketguideClient(PocketguideClient pocketguideClient) {
         this.pocketguideClient = pocketguideClient;
     }
 
-    public String findFilteredTours(Optional<String> filter) {
+    public String findFilteredTourNames(Optional<String> filter) {
         List<Tour> tours;
         if (filter.isPresent()) {
             tours = tourRepository.findByNameContainingIgnoreCase(filter.get());

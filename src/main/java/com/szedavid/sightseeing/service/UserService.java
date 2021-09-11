@@ -24,7 +24,7 @@ public class UserService {
     this.roleService = roleService;
   }
 
-  public void fillWithDemoUsers() {
+  public void initForDemo() {
     var user = new User();
     user.setUsername("john");
     user.setPassword("$2a$12$qWD5QdzQZ8QCd5chaYME7Ou/TBDByqGibbQrndM7UlSxJbd2NL1T6");
