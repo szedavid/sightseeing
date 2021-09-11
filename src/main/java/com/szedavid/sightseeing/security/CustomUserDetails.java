@@ -1,7 +1,6 @@
 package com.szedavid.sightseeing.security;
 
-import com.szedavid.sightseeing.entity.Role;
-import com.szedavid.sightseeing.entity.User;
+import com.szedavid.sightseeing.model.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

@@ -1,6 +1,6 @@
 package com.szedavid.sightseeing.repository;
 
-import com.szedavid.sightseeing.entity.User;
+import com.szedavid.sightseeing.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

@@ -1,6 +1,6 @@
 package com.szedavid.sightseeing.repository;
 
-import com.szedavid.sightseeing.entity.Tour;
+import com.szedavid.sightseeing.model.Tour;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

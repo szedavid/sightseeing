@@ -1,4 +1,4 @@
-package com.szedavid.sightseeing.entity;
+package com.szedavid.sightseeing.model;
 
 import com.sun.istack.NotNull;
 import org.hibernate.validator.constraints.Length;

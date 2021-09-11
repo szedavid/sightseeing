@@ -1,6 +1,6 @@
 package com.szedavid.sightseeing.service;
 
-import com.szedavid.sightseeing.entity.User;
+import com.szedavid.sightseeing.model.User;
 import com.szedavid.sightseeing.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

@@ -2,7 +2,7 @@ package com.szedavid.sightseeing.service;
 
 import com.szedavid.sightseeing.client.PocketguideClient;
 import com.szedavid.sightseeing.dto.FilterDTO;
-import com.szedavid.sightseeing.entity.Tour;
+import com.szedavid.sightseeing.model.Tour;
 import com.szedavid.sightseeing.repository.TourRepository;
 import net.minidev.json.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
