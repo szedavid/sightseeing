@@ -53,7 +53,7 @@ public class UserService {
     // In a real project user cration should be more sophisticated
     public User create(User user) {
         if (findByUsername(user.getUsername()).isPresent()) {
-            System.out.println("User name in use: " + user.getUsername());
+            logger.debug("User name already exists: {}", user.getUsername());
             return null;
         }
         return userRepository.save(user);

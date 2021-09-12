@@ -9,6 +9,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import static org.hamcrest.Matchers.equalTo;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.httpBasic;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -25,7 +26,9 @@ public class SightseeingApplicationTests {
     // should return Unauthorized status code
     @Test
     public void refreshToursWithoutAuth() throws Exception {
-        mvc.perform(MockMvcRequestBuilders.post("/tours/refresh").accept(MediaType.APPLICATION_JSON))
+        mvc.perform(MockMvcRequestBuilders.post("/tours/refresh")
+                        .with(csrf())
+                        .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isUnauthorized());
     }
 
@@ -33,6 +36,7 @@ public class SightseeingApplicationTests {
     @Test
     public void refreshToursWithLowLevelAuth() throws Exception {
         mvc.perform(MockMvcRequestBuilders.post("/tours/refresh")
+                        .with(csrf())
                         .accept(MediaType.APPLICATION_JSON)
                         .with(httpBasic("john", "john12")))
                 .andExpect(status().isForbidden());
@@ -42,6 +46,7 @@ public class SightseeingApplicationTests {
     @Test
     public void refreshToursWithWrongPwd() throws Exception {
         mvc.perform(MockMvcRequestBuilders.post("/tours/refresh")
+                        .with(csrf())
                         .accept(MediaType.APPLICATION_JSON)
                         .with(httpBasic("admin", "john12")))
                 .andExpect(status().isUnauthorized());

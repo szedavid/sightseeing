@@ -46,7 +46,7 @@ public class RoleService {
      */
     public Role createIfMissing(Role role) {
         if (findByName(role.getName()) != null) {
-            System.out.println("Role already exists: " + role.getName());
+            logger.debug("Role already exists: {}", role.getName());
             return null;
         }
         return roleRepository.save(role);

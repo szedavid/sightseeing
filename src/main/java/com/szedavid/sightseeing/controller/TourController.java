@@ -48,6 +48,8 @@ public class TourController {
      * If the "filter" is null all tours will be refreshed.
      * @param filterDTO JSON object containing the "filter" for the tour names.
      */
+
+    // In a real project I would use pagination
     @PostMapping("/refresh")
     @ResponseStatus(HttpStatus.OK)
     public void refresh(

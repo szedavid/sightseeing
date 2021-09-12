@@ -46,6 +46,7 @@ public class TourService {
         } else {
             tours = tourRepository.findAll();
         }
+
         List<String> names = new ArrayList<>();
         tours.forEach((tour -> names.add(tour.getName())));
 
