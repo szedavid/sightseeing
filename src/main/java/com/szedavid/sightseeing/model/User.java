@@ -2,6 +2,7 @@ package com.szedavid.sightseeing.model;
 
 import com.sun.istack.NotNull;
 import org.hibernate.validator.constraints.Length;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import javax.persistence.*;
 import java.util.Objects;
@@ -23,7 +24,7 @@ public class User {
 
     @NotNull
     @Length(max = 100)
-    private String password; // todo encrypt
+    private String password;
 
     @ManyToMany(fetch = FetchType.EAGER)    // todo LAZY
     @JoinTable(
@@ -34,12 +35,12 @@ public class User {
                     name = "role_id", referencedColumnName = "id"))
     private Set<Role> roles;
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public Long getId() {
         return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getUsername() {
@@ -54,8 +55,8 @@ public class User {
         return password;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setPassword(String rawPassword) {
+        this.password = new BCryptPasswordEncoder().encode(rawPassword);
     }
 
     public Set<Role> getRoles() {

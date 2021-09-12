@@ -2,8 +2,9 @@ package com.szedavid.sightseeing.service;
 
 import com.szedavid.sightseeing.model.User;
 import com.szedavid.sightseeing.repository.UserRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -14,6 +15,7 @@ import java.util.Set;
  */
 @Service
 public class UserService {
+    private final Logger logger = LoggerFactory.getLogger(UserService.class);
 
     private UserRepository userRepository;
     private RoleService roleService;
@@ -32,21 +34,20 @@ public class UserService {
      * Inits the database by creating required users for the demo
      */
     public void initForDemo() {
-        var encoder = new BCryptPasswordEncoder();
         var user = new User();
         user.setUsername("john");
-        user.setPassword(encoder.encode("john12"));
+        user.setPassword("john12");
         user.setRoles(Set.of(roleService.findByName("ROLE_USER")));
         create(user);
 
         user = new User();
         user.setUsername("admin");
-        user.setPassword(encoder.encode("admin12"));
+        user.setPassword("admin12");
         // In a real project we could use role hierarchy so admin gets user privileges automatically
         user.setRoles(Set.of(roleService.findByName("ROLE_USER"), roleService.findByName("ROLE_ADMIN")));
         create(user);
 
-        System.out.println("Users with 'user' and 'admin' level ready to use.");
+        logger.debug("Users with 'user' and 'admin' level ready to use.");
     }
 
     // In a real project user cration should be more sophisticated

@@ -19,6 +19,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     /**
      * Returns the user with the given username.
+     *
      * @param username The username of the user to be found
      * @return The user sought
      * @throws UsernameNotFoundException Thrown whe username not found

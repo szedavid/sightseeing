@@ -35,6 +35,7 @@ public class TourService {
     /**
      * Finds the tour names containing the filter string.
      * Uses case-insensitive search.
+     *
      * @param filter The text to look for in tour names
      * @return The list of the tours found
      */
@@ -56,6 +57,7 @@ public class TourService {
      * If the filter value is null all tours will be refreshed
      * else only the ones which contain the filter text.
      * Filtering is case-insensitive.
+     *
      * @param filterDTO
      */
     public void refresh(FilterDTO filterDTO) {
