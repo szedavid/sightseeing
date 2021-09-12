@@ -51,6 +51,13 @@ public class UserService {
     }
 
     // In a real project user cration should be more sophisticated
+
+    /**
+     * Creates a new user if username is not already in use.
+     *
+     * @param user The user to create
+     * @return The created user or null if username is in use
+     */
     public User create(User user) {
         if (findByUsername(user.getUsername()).isPresent()) {
             logger.debug("User name already exists: {}", user.getUsername());

@@ -5,6 +5,8 @@ import com.szedavid.sightseeing.dto.FilterDTO;
 import com.szedavid.sightseeing.model.Tour;
 import com.szedavid.sightseeing.repository.TourRepository;
 import net.minidev.json.JSONArray;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cglib.core.CollectionUtils;
 import org.springframework.stereotype.Service;
@@ -18,6 +20,7 @@ import java.util.Optional;
  */
 @Service
 public class TourService {
+    private final Logger logger = LoggerFactory.getLogger(TourService.class);
 
     private TourRepository tourRepository;
     private PocketguideClient pocketguideClient;
@@ -59,7 +62,7 @@ public class TourService {
      * else only the ones which contain the filter text.
      * Filtering is case-insensitive.
      *
-     * @param filterDTO
+     * @param filterDTO The filterDTO containing the filter text
      */
     public void refresh(FilterDTO filterDTO) {
         var receivedData = pocketguideClient.getTours();
@@ -68,9 +71,37 @@ public class TourService {
             tours = filterTours(tours, filterDTO.filter);
         }
         tourRepository.saveAll(tours);
+
+        logger.debug("Saved {} records", tours.size());
     }
 
-    private ArrayList<Tour> filterTours(List<Tour> tours, String filter) {
+    /**
+     * Creates or updates the given tour.
+     * @param tour The tour to be persisted
+     * @return The persisted tour
+     */
+    public Tour save(Tour tour) {
+        return tourRepository.save(tour);
+    }
+
+    /**
+     * Deletes a tour by ID.
+     *
+     * @param id The ID of the tour to be deleted
+     */
+    public void deleteById(Long id) {
+        tourRepository.deleteById(id);
+    }
+
+    /**
+     * Filters the given tour list by checking if the elements contain
+     * the given text in case-insensitive format.
+     *
+     * @param tours The list to be filtered
+     * @param filter The string we are looking for in tour names
+     * @return The filtered tour list
+     */
+    public ArrayList<Tour> filterTours(List<Tour> tours, String filter) {
         var filteredTours = new ArrayList<>(tours);
         CollectionUtils.filter(filteredTours, tour -> (((Tour) tour).getName().toUpperCase().contains(filter.toUpperCase())));
         return filteredTours;

@@ -31,6 +31,7 @@ public class TourController {
     /**
      * Endpoint to list tour names.
      * Can be filtered by names containing a given text. All tour names will be listed if not set.
+     *
      * @param filter The "filter" query parameter to use to filter tours by name.
      * @return JSON object containing the array of (filtered) tour names. Empty array if none is found.
      */
@@ -46,6 +47,7 @@ public class TourController {
      * Endpoint to refresh the tour data in the database from the remote webservice.
      * The names of the tours to be refreshed can be set by the request body's JSON object's "filter" property.
      * If the "filter" is null all tours will be refreshed.
+     *
      * @param filterDTO JSON object containing the "filter" for the tour names.
      */
 
