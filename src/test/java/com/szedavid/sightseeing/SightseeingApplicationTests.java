@@ -36,7 +36,6 @@ public class SightseeingApplicationTests {
     @Test
     public void refreshToursWithLowLevelAuth() throws Exception {
         mvc.perform(MockMvcRequestBuilders.post("/tours/refresh")
-                        .with(csrf())
                         .accept(MediaType.APPLICATION_JSON)
                         .with(httpBasic("john", "john12")))
                 .andExpect(status().isForbidden());

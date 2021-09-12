@@ -38,6 +38,6 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter imple
                 .antMatchers(HttpMethod.GET, "/tours").hasAuthority("ROLE_USER")
                 .antMatchers(HttpMethod.POST, "/tours/refresh").hasAuthority("ROLE_ADMIN")
                 .anyRequest().authenticated().and().httpBasic();
-        httpSecurity.csrf().disable();  // todo del !
+//        httpSecurity.csrf().disable();  // put back temporary to make testing with Postman easier
     }
 }
