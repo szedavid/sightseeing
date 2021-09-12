@@ -20,35 +20,36 @@ public class SightseeingApplicationTests {
     @Autowired
     private MockMvc mvc;
 
-    // todo in separate files (not only endpoints, and failing endpoints)
+    // REFRESH
 
-    // should throw Unauthorized status
+    // should return Unauthorized status code
     @Test
     public void refreshToursWithoutAuth() throws Exception {
-        mvc.perform(
-                        MockMvcRequestBuilders.post("/tours/refresh").accept(MediaType.APPLICATION_JSON))
+        mvc.perform(MockMvcRequestBuilders.post("/tours/refresh").accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isUnauthorized());
     }
 
+    // should return Forbidden status code
     @Test
     public void refreshToursWithLowLevelAuth() throws Exception {
-        mvc.perform(
-                        MockMvcRequestBuilders.post("/tours/refresh")
-                                .accept(MediaType.APPLICATION_JSON)
-                                .with(httpBasic("john","john12")))
+        mvc.perform(MockMvcRequestBuilders.post("/tours/refresh")
+                        .accept(MediaType.APPLICATION_JSON)
+                        .with(httpBasic("john", "john12")))
                 .andExpect(status().isForbidden());
     }
 
+    // should return Unauthorized status code
     @Test
     public void refreshToursWithWrongPwd() throws Exception {
-        mvc.perform(
-                        MockMvcRequestBuilders.post("/tours/refresh")
-                                .accept(MediaType.APPLICATION_JSON)
-                                .with(httpBasic("admin","john12")))
+        mvc.perform(MockMvcRequestBuilders.post("/tours/refresh")
+                        .accept(MediaType.APPLICATION_JSON)
+                        .with(httpBasic("admin", "john12")))
                 .andExpect(status().isUnauthorized());
     }
 
-    // todo back
+    // todo fix
+    // for some reason this test fails with "maven verify" but not with intellij testing
+    // com.fasterxml.jackson.core.JsonParseException: Invalid UTF-8 middle byte 0x63&#10; at [Source: (ByteArrayInputStream); line: 1, column: 5625]"
 //    @Test
 //    public void refreshTours() throws Exception {
 //        mvc.perform(
@@ -59,39 +60,43 @@ public class SightseeingApplicationTests {
 //                .andExpect(status().isOk());
 //    }
 
-    // todo auth check !
-    // should return empty array if no result for filter
+    // TOURS
+
+    // should return Unauthorized status code
     @Test
-    public void getNonExistingTours() throws Exception {
-        mvc.perform(
-                        MockMvcRequestBuilders.get("/tours?filter=nonExistingName").accept(MediaType.APPLICATION_JSON))
+    public void getToursWithoutAuth() throws Exception {
+        mvc.perform(MockMvcRequestBuilders.get("/tours")
+                        .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isUnauthorized());
+    }
+
+    // should return empty array when no result for filter
+    @Test
+    public void getEmptyArrayIfNoFilteredToursFound() throws Exception {
+        mvc.perform(MockMvcRequestBuilders.get("/tours?filter=nonExistingName")
+                        .with(httpBasic("john", "john12"))
+                        .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(content().string(equalTo("[]")));
     }
 
-
-    // should return all tours
+    // should return tour names
     @Test
-    public void getAllTours() throws Exception {
-        mvc.perform(
-                        MockMvcRequestBuilders.get("/tours")
-                                .accept(MediaType.APPLICATION_JSON))
+    public void getToursNames() throws Exception {
+        mvc.perform(MockMvcRequestBuilders.get("/tours")
+                        .with(httpBasic("john", "john12"))
+                        .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
-//                .andExpect(content().toString().length(greaterThanOrEqualTo(10000)); // todo
-        // todo above coding ?
     }
 
     // should return filtered array
     @Test
-    public void getFilteredTours() throws Exception {
-        mvc.perform(
-                        MockMvcRequestBuilders.get("/tours?filter=Pécs rejtett kincsei")
-                                .accept(MediaType.APPLICATION_JSON))
+    public void getFilteredTourNames() throws Exception {
+        mvc.perform(MockMvcRequestBuilders.get("/tours?filter=Pécs rejtett kincsei")
+                        .with(httpBasic("john", "john12"))
+                        .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(content().string(equalTo("[\"PÃ©cs rejtett kincsei dr. PÃ¡va Zsolt polgÃ¡rmester vezetÃ©sÃ©vel\"]")));
-        // todo above coding ?
     }
-
-    // todo others
 
 }

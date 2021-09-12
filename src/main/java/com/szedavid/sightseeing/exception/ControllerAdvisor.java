@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
+import java.net.UnknownHostException;
 import java.time.LocalDateTime;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -21,16 +22,26 @@ public class ControllerAdvisor extends ResponseEntityExceptionHandler {
 
     @Override
     protected ResponseEntity<Object> handleHttpMessageNotReadable(HttpMessageNotReadableException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
-        return new ResponseEntity<>("Request body (JSON) is missing!", HttpStatus.BAD_REQUEST);
+
+        Map<String, Object> body = new LinkedHashMap<>();
+        body.put("timestamp", LocalDateTime.now());
+        body.put("message", ex.getMessage());
+
+        return new ResponseEntity<>(body, HttpStatus.BAD_REQUEST);
     }
 
     @Override
     protected ResponseEntity<Object> handleHttpRequestMethodNotSupported(HttpRequestMethodNotSupportedException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
-        return new ResponseEntity<>("Method not allowed!", HttpStatus.METHOD_NOT_ALLOWED);
+
+        Map<String, Object> body = new LinkedHashMap<>();
+        body.put("timestamp", LocalDateTime.now());
+        body.put("message", ex.getMessage());
+
+        return new ResponseEntity<>(body, HttpStatus.METHOD_NOT_ALLOWED);
     }
 
     @ExceptionHandler(RemoteNotFoundException.class)
-    public ResponseEntity<Object> handleCityNotFoundException(
+    protected ResponseEntity<Object> handleRemoteNotFoundException(
             RemoteNotFoundException ex, WebRequest request) {
 
         Map<String, Object> body = new LinkedHashMap<>();
@@ -41,7 +52,7 @@ public class ControllerAdvisor extends ResponseEntityExceptionHandler {
     }
 
     @ExceptionHandler(RemoteBadRequestException.class)
-    public ResponseEntity<Object> handleCityNotFoundException(
+    protected ResponseEntity<Object> handleRemoteBadRequestException(
             RemoteBadRequestException ex, WebRequest request) {
 
         Map<String, Object> body = new LinkedHashMap<>();

@@ -35,16 +35,9 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter imple
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.authorizeRequests()
-                .antMatchers("/*").permitAll()
-                .antMatchers("/tours").hasAuthority("ROLE_USER")
+                .antMatchers(HttpMethod.GET, "/tours").hasAuthority("ROLE_USER")
                 .antMatchers(HttpMethod.POST, "/tours/refresh").hasAuthority("ROLE_ADMIN")
                 .anyRequest().authenticated().and().httpBasic();
         httpSecurity.csrf().disable();  // todo del !
     }
-
-//    // todo NOT ALL!
-//    @Override
-//    public void addCorsMappings(CorsRegistry registry) {
-//        registry.addMapping("/**").allowedMethods("*");
-//    }
 }

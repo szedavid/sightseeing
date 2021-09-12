@@ -13,6 +13,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Tour related logic.
+ */
 @Service
 public class TourService {
 
@@ -29,6 +32,12 @@ public class TourService {
         this.pocketguideClient = pocketguideClient;
     }
 
+    /**
+     * Finds the tour names containing the filter string.
+     * Uses case-insensitive search.
+     * @param filter The text to look for in tour names
+     * @return The list of the tours found
+     */
     public String findFilteredTourNames(Optional<String> filter) {
         List<Tour> tours;
         if (filter.isPresent()) {
@@ -42,6 +51,13 @@ public class TourService {
         return JSONArray.toJSONString(names);
     }
 
+    /**
+     * Refreshes the tours form the remote server.
+     * If the filter value is null all tours will be refreshed
+     * else only the ones which contain the filter text.
+     * Filtering is case-insensitive.
+     * @param filterDTO
+     */
     public void refresh(FilterDTO filterDTO) {
         var receivedData = pocketguideClient.getTours();
         var tours = receivedData.getTours();

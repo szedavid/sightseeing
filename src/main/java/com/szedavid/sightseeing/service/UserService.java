@@ -3,11 +3,15 @@ package com.szedavid.sightseeing.service;
 import com.szedavid.sightseeing.model.User;
 import com.szedavid.sightseeing.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 import java.util.Set;
 
+/**
+ * User related logic.
+ */
 @Service
 public class UserService {
 
@@ -28,16 +32,17 @@ public class UserService {
      * Inits the database by creating required users for the demo
      */
     public void initForDemo() {
+        var encoder = new BCryptPasswordEncoder();
         var user = new User();
         user.setUsername("john");
-        user.setPassword("$2a$12$qWD5QdzQZ8QCd5chaYME7Ou/TBDByqGibbQrndM7UlSxJbd2NL1T6");   // todo with encode
+        user.setPassword(encoder.encode("john12"));
         user.setRoles(Set.of(roleService.findByName("ROLE_USER")));
         create(user);
 
         user = new User();
         user.setUsername("admin");
-        user.setPassword("$2a$12$njopzy7.ab1fOB4lIC/C.ewoZ9vKo21cgqfMy9cV32rYdQdw0E3Z6");   // todo with encode
-        // In a real project we could use role hierarchy so admin gets user privileges
+        user.setPassword(encoder.encode("admin12"));
+        // In a real project we could use role hierarchy so admin gets user privileges automatically
         user.setRoles(Set.of(roleService.findByName("ROLE_USER"), roleService.findByName("ROLE_ADMIN")));
         create(user);
 

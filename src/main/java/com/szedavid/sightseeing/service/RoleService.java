@@ -5,6 +5,9 @@ import com.szedavid.sightseeing.repository.RoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+/**
+ * Role related logic.
+ */
 @Service
 public class RoleService {
 
@@ -31,6 +34,11 @@ public class RoleService {
         System.out.println("'USER' and 'ADMIN' level roles are ready to use.");
     }
 
+    /**
+     * Creates the given role if not present yet.
+     * @param role The role to create
+     * @return The created role
+     */
     public Role createIfMissing(Role role) {
         if (findByName(role.getName()) != null) {
             System.out.println("Role already exists: " + role.getName());
@@ -39,6 +47,11 @@ public class RoleService {
         return roleRepository.save(role);
     }
 
+    /**
+     * Finds a role by its name.
+     * @param name The name of the role to be found
+     * @return The found role or null
+     */
     public Role findByName(String name) {
         return roleRepository.findByName(name).orElse(null);
     }

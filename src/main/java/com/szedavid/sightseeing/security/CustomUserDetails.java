@@ -24,7 +24,6 @@ public class CustomUserDetails implements UserDetails {
         var collection = new ArrayList<SimpleGrantedAuthority>();
         user.getRoles().forEach(role -> {
             collection.add(new SimpleGrantedAuthority(role.getName()));
-            System.out.println("Auth: " + user.getUsername() + " - " + role.getName());
         });
         return collection;
     }
