@@ -52,7 +52,7 @@ public class TourController {
     // In a real project I would use pagination
     @PostMapping("/refresh")
     @ResponseStatus(HttpStatus.OK)
-    public void refresh(
+    public void refreshTours(
             @RequestBody FilterDTO filterDTO
     ) {
         log.debug("REQUEST: /tours/refresh - filter: {}", filterDTO.filter);

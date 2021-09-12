@@ -15,8 +15,6 @@ public class CustomUserDetails implements UserDetails {
     public CustomUserDetails(User user) {
         super();
         this.user = user;
-
-        System.out.println("CustomUserDetails username: " + user.getUsername() + "roles: " + user.getRoles().size());
     }
 
     @Override

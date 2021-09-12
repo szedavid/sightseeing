@@ -26,7 +26,8 @@ public class User {
     @Length(max = 100)
     private String password;
 
-    @ManyToMany(fetch = FetchType.EAGER)    // todo LAZY
+    // In a real project I would use Lazy loadong with @Transactional on methods for improved performance
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "users_roles",
             joinColumns = @JoinColumn(

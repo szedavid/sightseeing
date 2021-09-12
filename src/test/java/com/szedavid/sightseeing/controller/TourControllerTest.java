@@ -1,6 +1,12 @@
-package com.szedavid.sightseeing;
+package com.szedavid.sightseeing.controller;
 
+import com.szedavid.sightseeing.dto.FilterDTO;
+import com.szedavid.sightseeing.service.RoleService;
+import com.szedavid.sightseeing.service.TourService;
+import com.szedavid.sightseeing.service.UserService;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -14,12 +20,32 @@ import static org.springframework.security.test.web.servlet.request.SecurityMock
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+// In a real project I would use a mock DB for tests. (Mockito)
+// If testing speed would be critical I would mock remote webservice connections too.
 @SpringBootTest
 @AutoConfigureMockMvc
-public class SightseeingApplicationTests {
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
+public class TourControllerTest {
+
+    @Autowired
+    RoleService roleService;
+
+    @Autowired
+    UserService userService;
+
+    @Autowired
+    TourService tourService;
 
     @Autowired
     private MockMvc mvc;
+
+    @BeforeAll
+    public void init(){
+        roleService.initForDemo();
+        userService.initForDemo();
+        tourService.refresh(new FilterDTO());
+        System.out.println("DB ready for testing");
+    }
 
     // REFRESH
 
@@ -52,7 +78,7 @@ public class SightseeingApplicationTests {
     }
 
     // todo fix
-    // for some reason this test fails with "maven verify" but not with intellij testing
+    // for some reason this test fails with "maven verify" using JaCoCo but not with native IntelliJ testing
     // com.fasterxml.jackson.core.JsonParseException: Invalid UTF-8 middle byte 0x63&#10; at [Source: (ByteArrayInputStream); line: 1, column: 5625]"
 //    @Test
 //    public void refreshTours() throws Exception {
@@ -60,7 +86,7 @@ public class SightseeingApplicationTests {
 //                        MockMvcRequestBuilders.post("/tours/refresh")
 //                                .contentType(MediaType.APPLICATION_JSON).content("{\"filter\": null}")
 //                                .accept(MediaType.APPLICATION_JSON)
-//                                .with(httpBasic("admin","admin12")))
+//                                .with(httpBasic("admin", "admin12")))
 //                .andExpect(status().isOk());
 //    }
 
@@ -86,7 +112,7 @@ public class SightseeingApplicationTests {
 
     // should return tour names
     @Test
-    public void getToursNames() throws Exception {
+    public void getTours() throws Exception {
         mvc.perform(MockMvcRequestBuilders.get("/tours")
                         .with(httpBasic("john", "john12"))
                         .accept(MediaType.APPLICATION_JSON))
