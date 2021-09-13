@@ -17,7 +17,8 @@
     <properties>
         <java.version>11</java.version>
         <spring-cloud.version>2020.0.3</spring-cloud.version>
-        <test.min.coverage>0.6</test.min.coverage>
+        <test.min.coverage>0.9</test.min.coverage>
+        <argLine>-Dfile.encoding=UTF-8</argLine>
     </properties>
 
     <dependencyManagement>
@@ -105,12 +106,20 @@
                 </configuration>
             </plugin>
             <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <argLine>@{argLine}</argLine>
+                </configuration>
+            </plugin>
+            <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
                 <version>0.8.7</version>
                 <configuration>
                     <excludes>
                         <exclude>**/dev/</exclude>
+                        <exclude>**/SightseeingApplication.*</exclude>
                         <exclude>**/exception/</exclude>
                         <exclude>**/*DTO.*</exclude>
                         <exclude>**/model/*</exclude>

@@ -99,17 +99,16 @@ public class SightseeingApplicationTests {
                 .andExpect(status().isUnauthorized());
     }
 
-    // todo fix - see com.szedavid.sightseeing.service.TourServiceTest - refresh() for details
-//    @Test
-//    public void refreshTours() throws Exception {
-//        mvc.perform(
-//                        MockMvcRequestBuilders.post("/tours/refresh")
-//                                .with(csrf())
-//                                .contentType(MediaType.APPLICATION_JSON).content("{\"filter\": null}")
-//                                .accept(MediaType.APPLICATION_JSON)
-//                                .with(httpBasic("admin", "admin12")))
-//                .andExpect(status().isOk());
-//    }
+    @Test
+    public void refreshTours() throws Exception {
+        mvc.perform(
+                        MockMvcRequestBuilders.post("/tours/refresh")
+                                .with(csrf())
+                                .contentType(MediaType.APPLICATION_JSON).content("{\"filter\": null}")
+                                .accept(MediaType.APPLICATION_JSON)
+                                .with(httpBasic("admin", "admin12")))
+                .andExpect(status().isOk());
+    }
 
     // TOURS
 

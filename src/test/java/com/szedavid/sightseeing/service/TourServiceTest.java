@@ -1,5 +1,6 @@
 package com.szedavid.sightseeing.service;
 
+import com.szedavid.sightseeing.dto.FilterDTO;
 import com.szedavid.sightseeing.model.Tour;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.greaterThan;
 import static org.hamcrest.Matchers.hasSize;
 
 @SpringBootTest
@@ -37,14 +39,10 @@ class TourServiceTest {
         assertThat(filtered, hasSize(2));
     }
 
-    // todo fix
-    // This test fails with "maven verify" using JaCoCo but not with native IntelliJ testing.
-    // According to the log the received tour list coming from the remote webservice contains some invalid characters.
-    // com.fasterxml.jackson.core.JsonParseException: Invalid UTF-8 middle byte 0x63&#10; at [Source: (ByteArrayInputStream); line: 1, column: 5625]"
-//    @Test
-//    void refresh() {
-//        FilterDTO filterDTO = new FilterDTO();
-//        var refreshedCnt = tourService.refresh(filterDTO);
-//        assertThat(refreshedCnt, greaterThan(0));
-//    }
+    @Test
+    void refresh() {
+        FilterDTO filterDTO = new FilterDTO();
+        var refreshedCnt = tourService.refresh(filterDTO);
+        assertThat(refreshedCnt, greaterThan(0));
+    }
 }
