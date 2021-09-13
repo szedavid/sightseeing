@@ -110,6 +110,7 @@
                 <version>0.8.7</version>
                 <configuration>
                     <excludes>
+                        <exclude>**/dev/</exclude>
                         <exclude>**/exception/</exclude>
                         <exclude>**/*DTO.*</exclude>
                         <exclude>**/model/*</exclude>

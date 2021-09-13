@@ -3,6 +3,7 @@ package com.szedavid.sightseeing.security;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -15,6 +16,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
 @EnableWebSecurity
+@Profile("production")
 public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter implements WebMvcConfigurer {
 
     private UserDetailsService userDetailsService;
@@ -38,6 +40,5 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter imple
                 .antMatchers(HttpMethod.GET, "/tours").hasAuthority("ROLE_USER")
                 .antMatchers(HttpMethod.POST, "/tours/refresh").hasAuthority("ROLE_ADMIN")
                 .anyRequest().authenticated().and().httpBasic();
-//        httpSecurity.csrf().disable();  // todo comment out - put back temporary to make testing with Postman easier
     }
 }
