@@ -1,4 +1,4 @@
-package com.szedavid.sightseeing.controller;
+package com.szedavid.sightseeing;
 
 import com.szedavid.sightseeing.model.Tour;
 import com.szedavid.sightseeing.service.RoleService;
@@ -16,7 +16,6 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import static org.hamcrest.Matchers.equalTo;
-import static org.mockito.ArgumentMatchers.contains;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.httpBasic;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -27,8 +26,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 @AutoConfigureMockMvc
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-public class TourControllerTest {
-    Long testIDs[] = {999999999999999998L, 999999999999999999L};
+public class SightseeingApplicationTests {
+    Long[] testIDs = {999999999999999998L, 999999999999999999L};
 
     @Autowired
     RoleService roleService;
@@ -100,10 +99,7 @@ public class TourControllerTest {
                 .andExpect(status().isUnauthorized());
     }
 
-    // todo fix
-    // This test fails with "maven verify" using JaCoCo but not with native IntelliJ testing.
-    // According to log the received tour list comong from the remote webservice contains some invalid characters.
-    // com.fasterxml.jackson.core.JsonParseException: Invalid UTF-8 middle byte 0x63&#10; at [Source: (ByteArrayInputStream); line: 1, column: 5625]"
+    // todo fix - see com.szedavid.sightseeing.service.TourServiceTest - refresh() for details
 //    @Test
 //    public void refreshTours() throws Exception {
 //        mvc.perform(

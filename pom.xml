@@ -17,7 +17,7 @@
     <properties>
         <java.version>11</java.version>
         <spring-cloud.version>2020.0.3</spring-cloud.version>
-        <test.min.coverage>0.8</test.min.coverage>
+        <test.min.coverage>0.6</test.min.coverage>
     </properties>
 
     <dependencyManagement>

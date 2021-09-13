@@ -64,7 +64,7 @@ public class TourService {
      *
      * @param filterDTO The filterDTO containing the filter text
      */
-    public void refresh(FilterDTO filterDTO) {
+    public Integer refresh(FilterDTO filterDTO) {
         var receivedData = pocketguideClient.getTours();
         var tours = receivedData.getTours();
         if (filterDTO.filter != null) {
@@ -73,6 +73,7 @@ public class TourService {
         tourRepository.saveAll(tours);
 
         logger.debug("Saved {} records", tours.size());
+        return tours.size();
     }
 
     /**
