@@ -6,8 +6,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -35,8 +37,8 @@ public class TourController {
      * @param filter The "filter" query parameter to use to filter tours by name.
      * @return JSON object containing the array of (filtered) tour names. Empty array if none is found.
      */
-    @GetMapping("")
-    public String getTours(
+    @GetMapping(value = "")
+    public List<String> getTours(
             @RequestParam("filter") Optional<String> filter
     ) {
         log.debug("REQUEST: /tours - filter: {}", filter.orElse("null"));

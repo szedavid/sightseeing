@@ -4,7 +4,6 @@ import com.szedavid.sightseeing.client.PocketguideClient;
 import com.szedavid.sightseeing.dto.FilterDTO;
 import com.szedavid.sightseeing.model.Tour;
 import com.szedavid.sightseeing.repository.TourRepository;
-import net.minidev.json.JSONArray;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,7 +41,7 @@ public class TourService {
      * @param filter The text to look for in tour names
      * @return The list of the tours found
      */
-    public String findFilteredTourNames(Optional<String> filter) {
+    public List<String> findFilteredTourNames(Optional<String> filter) {
         List<Tour> tours;
         if (filter.isPresent()) {
             tours = tourRepository.findByNameContainingIgnoreCase(filter.get());
@@ -53,7 +52,7 @@ public class TourService {
         List<String> names = new ArrayList<>();
         tours.forEach((tour -> names.add(tour.getName())));
 
-        return JSONArray.toJSONString(names);
+        return names;
     }
 
     /**
