@@ -43,9 +43,6 @@ public class SightseeingApplicationTests {
 
     @BeforeAll
     public void init() {
-        roleService.initForDemo();
-        userService.initForDemo();
-
         var tour = new Tour();
         tour.setId(testIDs[0]);
         tour.setName("First test tour");

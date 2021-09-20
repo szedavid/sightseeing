@@ -26,13 +26,6 @@ public class SightseeingApplication {
         SpringApplication.run(SightseeingApplication.class, args);
     }
 
-    // In a real project I would use Liquibase
-    @EventListener(ApplicationReadyEvent.class)
-    public void createDemoUsers() {
-        roleService.initForDemo();
-        userService.initForDemo();
-    }
-
     @Bean
     public WebMvcConfigurer corsConfigurer() {
         return new WebMvcConfigurer() {

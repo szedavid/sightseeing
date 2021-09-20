@@ -23,22 +23,6 @@ public class RoleService {
     }
 
     /**
-     * Inits the database by creating roles
-     */
-    // In a real project I would use Liquibase instead
-    public void initForDemo() {
-        var role = new Role();
-        role.setName("ROLE_USER");
-        createIfMissing(role);
-
-        role = new Role();
-        role.setName("ROLE_ADMIN");
-        createIfMissing(role);
-
-        logger.debug("'USER' and 'ADMIN' level roles are ready to use.");
-    }
-
-    /**
      * Creates the given role if not present yet.
      *
      * @param role The role to create

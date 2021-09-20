@@ -30,26 +30,6 @@ public class UserService {
         this.roleService = roleService;
     }
 
-    /**
-     * Inits the database by creating required users for the demo
-     */
-    public void initForDemo() {
-        var user = new User();
-        user.setUsername("john");
-        user.setPassword("john12");
-        user.setRoles(Set.of(roleService.findByName("ROLE_USER")));
-        create(user);
-
-        user = new User();
-        user.setUsername("admin");
-        user.setPassword("admin12");
-        // In a real project we could use role hierarchy so admin gets user privileges automatically
-        user.setRoles(Set.of(roleService.findByName("ROLE_USER"), roleService.findByName("ROLE_ADMIN")));
-        create(user);
-
-        logger.debug("Users with 'user' and 'admin' level ready to use.");
-    }
-
     // In a real project user cration should be more sophisticated
 
     /**
