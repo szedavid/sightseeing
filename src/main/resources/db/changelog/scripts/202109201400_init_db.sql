@@ -1,46 +1,37 @@
 -- Creating tables
 create table public.role
 (
-    id   bigint not null,
-    name varchar(50),
-    primary key (id)
+    id   SERIAL PRIMARY KEY,
+    name varchar(50)
 );
 
 create table public.tour
 (
-    id        bigint       not null,
+    id        BIGSERIAL PRIMARY KEY,
     long_desc varchar(5000),
-    name      varchar(250) not null,
-    primary key (id)
+    name      varchar(250) not null
 );
 
 create table public.user
 (
-    id       bigint not null,
+    id       BIGSERIAL PRIMARY KEY,
     password varchar(100),
     username varchar(50),
-    primary key (id)
+
+    CONSTRAINT UNIQUEPARENTANDSOURCE
+        unique (username)
 );
 
 create table public.users_roles
 (
-    user_id bigint not null,
-    role_id bigint not null,
+    user_id bigint not null
+        constraint FK_users_roles_user references "user",
+    role_id bigint not null
+        constraint FK_users_roles_role references role,
     primary key (user_id, role_id)
 );
 
--- Creating keys
-alter table public.user
-    drop constraint if exists UK_username;
-
-alter table public.user
-    add constraint UK_username unique (username);
-
-alter table public.users_roles
-    add constraint FK_users_roles_role foreign key (role_id) references role;
-
-alter table public.users_roles
-    add constraint FK_users_roles_user foreign key (user_id) references user;
-
 -- Creating sequences
 create sequence public.hibernate_sequence start with 1 increment by 1;
+
+COMMIT;
