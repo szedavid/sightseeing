@@ -1,12 +1,12 @@
 -- Creating tables
-create table role
+create table public.role
 (
     id   bigint not null,
     name varchar(50),
     primary key (id)
 );
 
-create table tour
+create table public.tour
 (
     id        bigint       not null,
     long_desc varchar(5000),
@@ -14,7 +14,7 @@ create table tour
     primary key (id)
 );
 
-create table user
+create table public.user
 (
     id       bigint not null,
     password varchar(100),
@@ -22,7 +22,7 @@ create table user
     primary key (id)
 );
 
-create table users_roles
+create table public.users_roles
 (
     user_id bigint not null,
     role_id bigint not null,
@@ -30,17 +30,17 @@ create table users_roles
 );
 
 -- Creating keys
-alter table user
+alter table public.user
     drop constraint if exists UK_username;
 
-alter table user
+alter table public.user
     add constraint UK_username unique (username);
 
-alter table users_roles
+alter table public.users_roles
     add constraint FK_users_roles_role foreign key (role_id) references role;
 
-alter table users_roles
+alter table public.users_roles
     add constraint FK_users_roles_user foreign key (user_id) references user;
 
 -- Creating sequences
-create sequence hibernate_sequence start with 1 increment by 1;
+create sequence public.hibernate_sequence start with 1 increment by 1;
